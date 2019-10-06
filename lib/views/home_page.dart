@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_cep/services/via_cep_service.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
+import 'package:search_cep/theme.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,6 +25,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Consultar CEP'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              if (DynamicTheme.of(context).data == myLightTheme) {
+                DynamicTheme.of(context).setThemeData(myDarkTheme);
+              } else {
+                DynamicTheme.of(context).setThemeData(myLightTheme);
+              }
+            },
+            icon: Icon(Icons.invert_colors),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
