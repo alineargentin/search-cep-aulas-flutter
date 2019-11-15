@@ -17,6 +17,17 @@ class _HomePageState extends State<HomePage> {
   String _result;
   final _formKey = GlobalKey<FormState>();
 
+  // controllers para o form de resultado
+  var _resultCepController = TextEditingController();
+  var _logradouroController = TextEditingController();
+  var _complementoController = TextEditingController();
+  var _bairroController = TextEditingController();
+  var _localidadeController = TextEditingController();
+  var _ufController = TextEditingController();
+  var _unidadeController = TextEditingController();
+  var _ibgeController = TextEditingController();
+  var _giaController = TextEditingController();
+
   @override
   void dispose() {
     super.dispose();
@@ -134,6 +145,15 @@ class _HomePageState extends State<HomePage> {
 
         setState(() {
           _result = resultCep.toJson();
+          _resultCepController.text = resultCep.cep;
+          _logradouroController.text = resultCep.logradouro;
+          _complementoController.text = resultCep.complemento;
+          _bairroController.text = resultCep.bairro;
+          _localidadeController.text = resultCep.localidade;
+          _ufController.text = resultCep.uf;
+          _unidadeController.text = resultCep.unidade;
+          _ibgeController.text = resultCep.ibge;
+          _giaController.text = resultCep.gia;
         });
       } on Exception {
         // DESAFIO 5: Tratar todas exceções e utilize Flushbar para exibir os erros para o usuário
@@ -153,9 +173,59 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildResultForm() {
-    return Container(
-      padding: EdgeInsets.only(top: 20.0),
-      child: Text(_result ?? ''),
+    // DESAFIO 3: Criar um formulário para adicionar todas os campos do JSON
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Cep'),
+            controller: _resultCepController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Logradouro'),
+            controller: _logradouroController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Complemento'),
+            controller: _complementoController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Bairro'),
+            controller: _bairroController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Localidade'),
+            controller: _localidadeController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'UF'),
+            controller: _ufController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Unidade'),
+            controller: _unidadeController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'IBGE'),
+            controller: _ibgeController,
+            enabled: false,
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Gia'),
+            controller: _giaController,
+            enabled: false,
+          )
+        ],
+      ),
     );
   }
 }
